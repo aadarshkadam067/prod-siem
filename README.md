@@ -32,7 +32,6 @@
 ## Table of Contents
 
 - [The Problem](#the-problem)
-- [Live Demo](#live-demo)
 - [Screenshots](#screenshots)
 - [Architecture](#architecture)
 - [Why This Stack](#why-this-stack)
@@ -65,43 +64,6 @@ A typical enterprise SOC receives **thousands of alerts per day**. The majority 
 6. **Streams everything live** to a 10-page React dashboard via WebSocket
 
 A human analyst opens the dashboard and sees pre-triaged cases with full AI reasoning already attached. They spend their time on the 5% of alerts that actually need human judgment.
-
----
-
-## Live Demo
-
-<!--
-  TODO: record 5-10 second screen capture of alert injection → AI decision appearing live.
-  Drop the .mp4/.webm into this section via GitHub drag-and-drop (autoplays on GitHub).
-  Keep as code block below until the recording exists.
--->
-
-```
-You inject one alert:
-
-  POST /api/v1/alerts/ingest
-  {
-    "event_type": "credential_dump",
-    "severity": "CRITICAL",
-    "source_ip": "10.10.1.42",
-    "raw_log": "LSASS dumped via procdump.exe on WORKSTATION-42"
-  }
-
-Within seconds, the AI engine:
-
-  [1] Analyzes  → CRITICAL | Confidence: 92% | ATT&CK: T1003.001
-  [2] Decision  → ESCALATE
-  [3] Reasoning → "LSASS memory dump detected using procdump.exe with -ma flag.
-                   This is a textbook Mimikatz-style credential theft pattern.
-                   Source IP 10.10.1.42 has prior lateral movement indicators
-                   in this session. Immediate containment recommended."
-  [4] Creates   → TheHive case CASE-A1B2C3D4
-  [5] Enriches  → IOC 10.10.1.42 via Cortex AbuseIPDB analyzer
-  [6] Reports   → PDF incident report generated with full timeline
-  [7] Broadcasts → WebSocket pushes ai_decision event to all dashboards
-
-Dashboard updates in real time. No page refresh. No manual triage.
-```
 
 ---
 
